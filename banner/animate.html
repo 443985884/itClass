@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 200px;
+            height: 200px;
+            margin-top: 40px;
+            position: relative;
+            transition:all 1s ;
+            transform-style: preserve-3d;/* 重点 */
+        }
+        .container .item {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .a {
+            background: red;
+            transform:rotateY(0);
+        }
+        .b {
+            background: blue;
+            transform:rotateY(-180deg);
+        }
+        .container:hover {
+            transform:rotateY(-180deg);
+        }
+
+
+        .demo1 {
+            margin: 20px auto;
+            width: 200px;
+            perspective: 1200px;/*重点*/
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;/*重点*/
+            color: #fff;
+        }
+
+        .demo1 .demo1-1,.demo1 .demo1-2 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            text-align: center;
+            background-color: blue;
+        }
+
+        .demo1 .demo1-1{
+            z-index: 2;
+            background-color: red;
+            transform-origin: left;
+            transition: all 1s ease-in-out;
+            transform-style: preserve-3d;
+
+        }
+
+        .demo1:hover .demo1-1 {
+            transform: rotateY(-120deg);
+        }
+
+        .flipper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transition: 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-container .front,
+        .flip-container .back {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            transform-style: preserve-3d;/* 翻转后背面不可见 */
+        }
+        .flip-container .info{
+            backface-visibility: hidden;/* 翻转后背面不可见 */
+        }
+
+        .front {
+            transform: rotateY(0deg);
+            z-index: 2;
+            background: red;
+        }
+
+        .back {
+            transform: rotateY(-180deg);/* 初始翻转-180deg， */
+            background: green;
+        }
+        .flip-container:hover .flipper {
+            transform: rotateY(180deg);/*hover的时候翻转180deg,back刚好转到正面可见，front正面转到反面不可见*/
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+ <div class="item a">aa</div>
+ <div class="item b">bb</div>
+</div>
+<div class="demo1">
+    　　<div class="demo1-1">
+    　　　　<div class='info'> 这是正面</div>
+    　　</div>
+    　　<div class="demo1-2">这是反面</div>
+</div>
+<div class="flip-container">
+    <div class="flipper">
+        <div class="front">
+            <div class="info">here is content : AA</div>
+        </div>
+        <div class="back">
+            <div class="info">here is content : BB</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

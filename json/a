@@ -1,0 +1,65 @@
+ $(document).ready(function(){
+        let index = 1,
+            instance = $('li')[0].offsetWidth,
+            oldlen = $('li').length;
+
+        // 分别前后插入最后和最前的元素
+        $('ul').append($("li").eq(0).clone()).prepend($("li").eq(oldlen - 1).clone());;
+
+        let len = $('li').length;
+
+        $('ul').css({'width': instance * len + 'px', 'left': -instance + 'px'});
+
+        $('.nextBtn').on('click', function(){
+
+            index++;
+            $('ul').stop().animate({'left': -instance * index}, 300, function(){
+                // 当滑动到最后(复制到最后的第一张图位置)，等动画完成之后，初始化整个图片滚动层容器的位置
+                if( index == len - 1 ){
+                    index = 1;
+                    $('ul').css({'left': -instance * index + 'px'});
+                }
+            });
+
+        });
+
+
+        $('.prevBtn').on('click', function(){
+
+            index--;
+            $('ul').stop().animate({'left': -instance * index}, 300, function(){
+                // 当滑动到前面(复制到最前面的最后一张图位置)，等动画完成之后，初始化整个图片滚动层容器的位置
+                if( index == 0 ){
+                    index = len - 2;
+                    $('ul').css({'left': -instance * index + 'px'});
+                }
+            });
+
+        });
+
+        // 自动播放
+        function autoPlay(){
+
+            autoplay = setInterval(function(){
+
+                index++;
+                $('ul').stop().animate({'left': -instance * index}, 300, function(){
+                    if( index == len - 1 ){
+                        index = 1;
+                        $('ul').css({'left': -instance * index + 'px'});
+                    }
+                });
+
+            }, 3000);
+        };
+
+        // autoPlay();
+
+        $('.wrap').hover(function(){
+            autoplay && clearInterval(autoplay);
+        }, function(){
+            // autoPlay();
+        });
+
+
+    });
