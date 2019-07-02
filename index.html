@@ -45,29 +45,29 @@
 <script>
     window.onload = function(){
     init()
-        let time=null
+    let time = null;//定时器
     function init (){
         //创建元素
         let container = document.getElementById("container")
         let buttonStar = document.createElement("button")
         let buttonEnd = document.createElement("button")
 
-        for(let i=0;i<9;i++){
+        for(let i = 0;i < 9; i++){
             let items = document.createElement("div")
             items.setAttribute("class","item")
             container.appendChild(items)
         }
-        buttonStar.innerText="开始闪"
-        buttonEnd.innerText="结束闪"
+        buttonStar.innerText = "开始闪"
+        buttonEnd.innerText = "结束闪"
         container.appendChild(buttonStar)
         container.appendChild(buttonEnd)
 
-        let items=container.querySelectorAll(".item")
+        let items = container.querySelectorAll(".item")
         buttonStar.addEventListener("click",function () {
             time = setInterval(function () {
                 let num = getRandom(0,items.length)
                 changeeColorItem(items,"orange")
-                for(let i=0;i<num.length;i++) {
+                for(let i = 0;i< num.length; i++) {
                     items[num[i]].style.backgroundColor =changeColor()
                 }
             },1000)
@@ -80,16 +80,16 @@
     }
     // 获取随机颜色
     function changeColor () {
-        const r=Math.floor(Math.random()*256);
-        const g=Math.floor(Math.random()*256);
-        const b=Math.floor(Math.random()*256);
+        const r = Math.floor(Math.random()*256);
+        const g = Math.floor(Math.random()*256);
+        const b = Math.floor(Math.random()*256);
         return "rgb("+r+','+g+','+b+")"//所有方法的拼接都可以用ES6新特性`其他字符串{$变量名}`替换
 
     }
      // 获取随机数
     function getRandom(min,max) {
        let arrNum = [];
-       for(let i=0 ; i<3 ; i++){
+       for(let i = 0 ; i< 3 ; i++){
           let val = Math.floor(Math.random() * (max-min)+min);
           if(arrNum.indexOf(val) === -1){
              arrNum.push(val)
@@ -100,7 +100,7 @@
        return arrNum
     }
     function changeeColorItem(elm,cor) {
-        for(let i=0;i<elm.length;i++) {
+        for(let i = 0;i< elm.length; i++) {
             elm[i].style.backgroundColor = cor
         }
     }
